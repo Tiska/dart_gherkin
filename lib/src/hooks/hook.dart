@@ -1,7 +1,7 @@
+import '../configuration.dart';
 import '../gherkin/steps/step_run_result.dart';
 import '../gherkin/steps/world.dart';
 import '../reporters/messages.dart';
-import '../configuration.dart';
 
 /// A hook that is run during certain points in the execution cycle
 /// You can override any or none of the methods
@@ -42,9 +42,8 @@ abstract class Hook {
       Future.value(null);
 
   /// Run before a step is executed
-  Future<void> onBeforeStep(World world, String step) => Future.value(null);
+  Future<void> onBeforeStep(World? world, String step) => Future.value(null);
 
   /// Run after a step has executed
-  Future<void> onAfterStep(World world, String step, StepResult stepResult) =>
-      Future.value(null);
+  Future<void> onAfterStep(World? world, String step, StepResult stepResult) => Future.value(null);
 }

@@ -1,11 +1,13 @@
-import '../../utils/perf.dart';
-import './step_run_result.dart';
-import '../../reporters/reporter.dart';
-import './step_configuration.dart';
-import './world.dart';
-import '../exceptions/parameter_count_mismatch_error.dart';
-import 'package:test/test.dart';
 import 'dart:async';
+
+import 'package:test/test.dart';
+
+import './step_configuration.dart';
+import './step_run_result.dart';
+import './world.dart';
+import '../../reporters/reporter.dart';
+import '../../utils/perf.dart';
+import '../exceptions/parameter_count_mismatch_error.dart';
 
 abstract class StepDefinitionGeneric<TWorld extends World> {
   final StepDefinitionConfiguration? config;
@@ -24,7 +26,7 @@ abstract class StepDefinitionGeneric<TWorld extends World> {
   Reporter? get reporter => _reporter;
 
   Future<StepResult> run(
-    TWorld world,
+    TWorld? world,
     Reporter reporter,
     Duration defaultTimeout,
     Iterable<dynamic> parameters,
@@ -78,8 +80,7 @@ abstract class StepDefinitionGeneric<TWorld extends World> {
 
   void _ensureParameterCount(int actual, int expected) {
     if (actual != expected) {
-      throw GherkinStepParameterMismatchException(
-          runtimeType, expected, actual);
+      throw GherkinStepParameterMismatchException(runtimeType, expected, actual);
     }
   }
 }
